@@ -2,6 +2,14 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/providers/theme-providers";
+import ConvexClientProvider from "@/providers/convex-client-provider";
+import {
+  ClerkProvider,
+  SignInButton,
+  SignedIn,
+  SignedOut,
+  UserButton
+} from '@clerk/nextjs'
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,10 +24,23 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
+    <ClerkProvider>
     <html lang="en">
-      <body className={inter.className}><ThemeProvider attribute='class' defaultTheme='system' enableSystem disableTransitionOnChange>
-	{children}
-</ThemeProvider></body>
+      <body className={inter.className}>
+        <ThemeProvider attribute='class' defaultTheme='system' enableSystem disableTransitionOnChange>
+        {/* <ConvexClientProvider> */}
+        <SignedOut>
+          <SignInButton />
+        </SignedOut>
+        {/* <SignedIn>
+          <UserButton />
+        </SignedIn> */}
+          {children}
+
+        {/* </ConvexClientProvider> */}
+</ThemeProvider>
+</body>
     </html>
+    </ClerkProvider>
   );
 }

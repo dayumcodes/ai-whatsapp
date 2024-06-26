@@ -12,6 +12,7 @@ const RightPanel = () => {
 
 	const conversationName = "John Doe";
     const isGroup=true;
+    
 
 	return (
 		<div className='w-3/4 flex flex-col'>
