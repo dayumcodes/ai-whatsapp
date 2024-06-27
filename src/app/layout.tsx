@@ -10,6 +10,7 @@ import {
   SignedOut,
   UserButton
 } from '@clerk/nextjs'
+import {Toaster} from "react-hot-toast"
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -24,11 +25,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <ClerkProvider>
+    // <ClerkProvider>
     <html lang="en">
       <body className={inter.className}>
         <ThemeProvider attribute='class' defaultTheme='system' enableSystem disableTransitionOnChange>
-        {/* <ConvexClientProvider> */}
+        <ConvexClientProvider>
         <SignedOut>
           <SignInButton />
         </SignedOut>
@@ -36,11 +37,11 @@ export default function RootLayout({
           <UserButton />
         </SignedIn> */}
           {children}
-
-        {/* </ConvexClientProvider> */}
+          <Toaster />
+        </ConvexClientProvider>
 </ThemeProvider>
 </body>
     </html>
-    </ClerkProvider>
+    // </ClerkProvider>
   );
 }
